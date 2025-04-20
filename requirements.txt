@@ -1,0 +1,7 @@
+semantic-kernel[azure]
+openai
+python-dotenv
+chainlit
+aiohttp
+azure-ai-projects 
+azure-identity 
