@@ -42,5 +42,5 @@ python main.py
 
 - [ ] Frontend integration  
 - [ ] Persistent user health profile  
-- [ ] Local RAG (Retrieval-Augmented Generation)  
-- [ ] Web search tool integration  
+- [Akhil] Local RAG (Retrieval-Augmented Generation)  
+- [Akhil] Web search tool integration  
