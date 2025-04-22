@@ -5,12 +5,13 @@
 ## 📁 Project Structure
 
 HealthPilot/
-├── agents/                    # Sub-agents: fitness, nutrition, mentalcare, manager  
-├── plugins/                   # Task dispatcher plugin  
-├── services/                  # External service configs (e.g., OpenAI)  
-├── main.py                    # Entry point  
-├── requirements.txt           # Python dependencies  
-└── .env                       # Environment variables  
+├── agents/            # Agent definitions
+├── services/          # Azure/OpenAI service configs
+├── app.py             # Chainlit entry point
+├── .env               # Environment secrets
+├── main.py            # Entry point for local test
+└── requirements.txt   # Python dependencies
+
 
 ## 🚀 Quick Start
 
@@ -30,13 +31,21 @@ AZURE_OPENAI_API_KEY=...
 AZURE_OPENAI_ENDPOINT=...
 AZURE_OPENAI_CHAT_DEPLOYMENT_NAME=...
 AZURE_OPENAI_API_VERSION=...
+
+# Generate this using: chainlit create-secret
+CHAINLIT_AUTH_SECRET=your_generated_secret
 ```
 
 Run the project:
 
 ```bash
-python main.py
+chainlit run app.py
 ```
+
+### 🔐 Login
+
+- Username: `admin`  
+- Password: `123`
 
 ## ✅ TODO
 
