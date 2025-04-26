@@ -27,7 +27,6 @@ export default function VideoPlayer() {
 
   return (
     <div style={containerStyle}>
-      {/* 并排视频 */}
       <div style={videoRowStyle}>
         <video
           src={props.sideUrl}
@@ -47,13 +46,12 @@ export default function VideoPlayer() {
         />
       </div>
 
-      {/* 文本区域 */}
       <div style={textStyle}>
         <p>
-          <strong>Note：</strong> {props.notes || "请保持正确姿势，避免身体摇晃。"}
+          <strong>Note：</strong> {props.notes || " "}
         </p>
         <p style={{ marginTop: "0.5rem" }}>
-          <strong>Tips：</strong> {props.tips || "收紧肩胛骨，保持核心稳定。"}
+          <strong>Tips：</strong> {props.tips || " "}
         </p>
       </div>
     </div>
