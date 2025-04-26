@@ -1,55 +1,58 @@
-# 🩺 HealthPilot
+# HealthPilot Setup Guide
 
-**HealthPilot** is a multi-agent health management system built with Semantic Kernel and Azure OpenAI. It supports automatic task routing for nutrition, fitness, and mental health guidance.
+## 1. Create Azure Account and Configure Agents
 
-## 📁 Project Structure
+- Register an Azure account.
+- Access **Azure AI Foundry** and create a new project.
+- Create three agents using the **GPT-4o** model:
+  - Fitness Agent
+  - Nutrition Agent
+  - MentalCare Agent
+- Refer to the prompts and comments in:
+  - `agents/fitness_agent.py`
+  - `agents/nutrition_agent.py`
+  - `agents/mentalcare_agent.py`
+- Fill in the prompts based on the instructions in the files.
 
-HealthPilot/
-├── agents/            # Agent definitions
-├── services/          # Azure/OpenAI service configs
-├── app.py             # Chainlit entry point
-├── .env               # Environment secrets
-├── main.py            # Entry point for local test
-└── requirements.txt   # Python dependencies
+## 2. Deploy GPT-4o-mini Model and Configure Environment
 
+- Deploy the **GPT-4o-mini** model in Azure.
+- Create a `.env` file in the project root directory with the following content:
 
-## 🚀 Quick Start
+  ```env
+  AZURE_OPENAI_DEPLOYMENT_NAME="gpt-4o-mini"
+  AZURE_OPENAI_API_KEY=your_api_key_here
+  AZURE_OPENAI_ENDPOINT=https://your-endpoint-here.openai.azure.com/
+  AZURE_OPENAI_API_VERSION="2024-12-01-preview"
+  AZURE_AI_AGENT_PROJECT_CONNECTION_STRING=your_agent_project_connection_string_here
+  ```
 
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # For Windows: venv\Scripts\activate
+## 3. Set up Chainlit Authentication
 
-# Install dependencies
-pip install -r requirements.txt
-```
+- Generate your Chainlit secret:
 
-Create a `.env` file with your Azure OpenAI settings:
+  ```bash
+  chainlit create-secret
+  ```
 
-```env
-AZURE_OPENAI_API_KEY=...
-AZURE_OPENAI_ENDPOINT=...
-AZURE_OPENAI_CHAT_DEPLOYMENT_NAME=...
-AZURE_OPENAI_API_VERSION=...
+- Copy the generated secret and add it to your `.env` file:
 
-# Generate this using: chainlit create-secret
-CHAINLIT_AUTH_SECRET=your_generated_secret
-```
+  ```env
+  CHAINLIT_AUTH_SECRET=your_generated_secret_here
+  ```
 
-Run the project:
+## 4. Install Required Packages
 
-```bash
-chainlit run app.py
-```
+- Install dependencies:
 
-### 🔐 Login
+  ```bash
+  pip install -r requirements.txt
+  ```
 
-- Username: `admin`  
-- Password: `123`
+## 5. Launch the Application
 
-## ✅ TODO
+- Run the app:
 
-- [ ] Frontend integration  
-- [ ] Persistent user health profile  
-- [Akhil] Local RAG (Retrieval-Augmented Generation)  
-- [Akhil] Web search tool integration  
+  ```bash
+  chainlit run app.py
+  ```
