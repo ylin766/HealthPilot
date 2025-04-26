@@ -2,6 +2,7 @@ from semantic_kernel.functions import kernel_function
 import asyncio
 from collections import defaultdict
 from playwright.async_api import async_playwright
+import json
 import re
 import chainlit as cl
 
@@ -12,24 +13,22 @@ class FitnessPlugin:
         description="Return a list of supported muscle names for training video search."
     )
     async def get_supported_muscles(self) -> str:
-        async with cl.Step(name=f"分析用户意图中...", type="function"):
+        async with cl.Step(name="Analyzing user intent...", type="function"):
             pass
-        return """
-            [
+        return json.dumps([
             "Chest", "Back", "Shoulders", "Biceps", "Triceps", 
             "Quadriceps", "Hamstrings", "Glutes", "Calves", "Abs", 
             "Forearms", "Neck", "Traps", "Obliques"
-            ]
-        """
+        ])
 
     @kernel_function(
         name="get_exercises_by_muscle",
         description="Return a list of exercises (with video URLs) for a specific muscle and gender."
     )
     async def get_exercises_by_muscle(self, muscle: str, gender: str) -> str:
-        async with cl.Step(name=f"正在进行爬虫获取资料...", type="function"):
+        async with cl.Step(name="Searching for resources...", type="function"):
             pass
-        base_url = f"https://musclewiki.com/exercises/{gender.lower()}/{muscle.lower().replace(' ', '%20')}/"
+        base_url = f"https://musclewiki.com/exercises/{gender.lower()}/{muscle.lower()}/"
         urls = await self.scrape_video_urls(base_url)
 
         video_dict = defaultdict(dict)
@@ -55,11 +54,11 @@ class FitnessPlugin:
                     "name": data["name"],
                     "sideUrl": data["sideUrl"],
                     "frontUrl": data["frontUrl"],
-                    "notes": " ",
+                    "notes": " ",  # Placeholder, can be filled later
                     "tips": " "
                 })
 
-        return str({
+        return json.dumps({
             "muscle": muscle,
             "exercises": exercises
         })
@@ -67,10 +66,10 @@ class FitnessPlugin:
     async def scrape_video_urls(self, url: str) -> list[str]:
         async with async_playwright() as p:
             browser = await p.chromium.launch(
-                headless=False,
+                headless=True,
                 args=[
-                    "--window-position=100,100",   # 弹窗位置（左上角）
-                    "--window-size=1200,800"       # 弹窗大小
+                    "--window-position=100,100",
+                    "--window-size=1200,800"
                 ]
             )
             page = await browser.new_page()
@@ -107,3 +106,25 @@ class FitnessPlugin:
 
             await browser.close()
             return list(seen_sources)
+
+    @kernel_function(
+        name="get_video_note_block_format",
+        description="Return the JSON output format for rendering exercise videos with notes and tips."
+    )
+    async def get_video_note_block_format(self) -> str:
+        async with cl.Step(name="Summarizing exercise notes format...", type="function"):
+            pass
+        return json.dumps({
+            "render": [
+                {
+                    "type": "video_note_block",
+                    "title": "<exercise name>",
+                    "props": {
+                        "sideUrl": "<side view video URL>",
+                        "frontUrl": "<front view video URL>",
+                        "notes": "<important form or safety notes>",
+                        "tips": "<effective training tips>"
+                    }
+                }
+            ]
+        })
