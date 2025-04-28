@@ -72,23 +72,23 @@ async def on_chat_end():
 async def set_starters():
     return [
         cl.Starter(
-            label="",
-            message="",
-            icon="/public/avatars/fitness.png",
+            label="General Health Question",
+            message="I want to live a healthier life. Can you give me some general advice?",
+            icon="/public/health.png",
         ),
         cl.Starter(
-            label="",
-            message="",
-            icon="/public/avatars/fitness.png",
+            label="Fitness Question",
+            message="I want to strongthen my arm. Can you suggest a workout plan with 5 actions?",
+            icon="/public/fitness.png",
         ),
         cl.Starter(
-            label="",
-            message="",
-            icon="/public/avatars/fitness.png",
+            label="Nutrition Question",
+            message="I would like to make a meal using chicken. Could you recommend a healthy recipe?",
+            icon="/public/nutrition.png",
         ),
         cl.Starter(
-            label="",
-            message="",
-            icon="/public/avatars/fitness.png",
+            label="Mental Health Question",
+            message="How can I manage stress and improve my sleep quality?",
+            icon="/public/mental.png",
         )
     ]
