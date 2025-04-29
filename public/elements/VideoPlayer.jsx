@@ -21,9 +21,9 @@ export default function VideoPlayer() {
 
   const textStyle = {
     fontSize: "0.875rem",
-    color: "white", 
+    color: "hsl(var(--foreground))",
     lineHeight: "1.6",
-  };
+  };  
 
   return (
     <div style={containerStyle}>
@@ -46,14 +46,6 @@ export default function VideoPlayer() {
         />
       </div>
 
-      <div style={textStyle}>
-        <p>
-          <strong>Note：</strong> {props.notes || " "}
-        </p>
-        <p style={{ marginTop: "0.5rem" }}>
-          <strong>Tips：</strong> {props.tips || " "}
-        </p>
-      </div>
     </div>
   );
 }
