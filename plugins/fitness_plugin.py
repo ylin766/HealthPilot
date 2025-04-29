@@ -26,7 +26,7 @@ class FitnessPlugin:
         description="Return a list of exercises (with video URLs) for a specific muscle and gender."
     )
     async def get_exercises_by_muscle(self, muscle: str, gender: str) -> str:
-        async with cl.Step(name="Searching for resources...", type="function"):
+        async with cl.Step(name="Searching for resources of " + muscle, type="function"):
             pass
         base_url = f"https://musclewiki.com/exercises/{gender.lower()}/{muscle.lower()}/"
         urls = await self.scrape_video_urls(base_url)
@@ -117,13 +117,18 @@ class FitnessPlugin:
         return json.dumps({
             "render": [
                 {
-                    "type": "video_note_block",
+                    "type": "video_block",
                     "title": "<exercise name>",
                     "props": {
                         "sideUrl": "<side view video URL>",
-                        "frontUrl": "<front view video URL>",
-                        "notes": "<important form or safety notes>",
-                        "tips": "<effective training tips>"
+                        "frontUrl": "<front view video URL>"
+                    }
+                },
+                {
+                    "type": "text_block",
+                    "title": "<content_title>",
+                    "props": {
+                        "content": "<content>"
                     }
                 }
             ]

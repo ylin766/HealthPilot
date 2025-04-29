@@ -46,6 +46,8 @@ class NutritionPlugin:
         description="Extract a structured recipe in render block format from a single recipe URL."
     )
     async def extract_recipe_from_url(self, url: str) -> str:
+        async with cl.Step(name=f"Web Searching Start..", type="function"):
+            pass
         print(f"📥 Extracting recipe from: {url}")
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=True)

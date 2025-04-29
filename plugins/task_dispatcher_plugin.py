@@ -26,34 +26,52 @@ class TaskDispatcherPlugin:
         
         try:
             parsed = json.loads(content)
-            if isinstance(parsed, dict):
-                render_items = parsed.get("render", [])
-            elif isinstance(parsed, list):
-                render_items = parsed
-            else:
-                raise ValueError("Unsupported JSON structure")
-
+            render_items = parsed.get("render", [])
             if not render_items:
                 raise ValueError("No render items")
 
             for item in render_items:
-                if item.get("type") == "video_note_block":
-                    props = item.get("props", {})
+                item_type = item.get("type")
+                title = item.get("title", "Untitled")
+                props = item.get("props", {})
+
+                if item_type == "video_block":
                     await cl.Message(
-                        content=f"🎥 {item.get('title', 'Exercise')}",
+                        content="",
                         elements=[
                             cl.CustomElement(
                                 name="VideoPlayer",
                                 props=props,
                                 display="inline"
                             )
-                        ]
+                        ],
+                        author="Fitness Agent"
                     ).send()
-                else:
-                    await cl.Message(content=f"📦 Unsupported render block: {item}").send()
 
-        except Exception as e:
-            await cl.Message(content=content).send()
+                elif item_type == "text_block":
+                    await cl.Message(
+                        content="",
+                        elements=[
+                            cl.CustomElement(
+                                name="TextPlayer",
+                                props={
+                                    "title": title,
+                                    "content": props.get("content", "")
+                                },
+                                display="inline"
+                            )
+                        ],
+                        author="Fitness Agent"
+                    ).send()
+
+                else:
+                    await cl.Message(
+                        content=f"📦 Unsupported render block: {item_type}",
+                        author="Fitness Agent"
+                    ).send()
+
+        except Exception:
+            await cl.Message(content=content, author="Fitness Agent").send()
 
     @kernel_function(name="route_to_nutrition", description="Route a nutrition-related task.")
     async def route_to_nutrition(self, message: str) -> str:
@@ -62,7 +80,7 @@ class TaskDispatcherPlugin:
             agent_reply = response.message.content if hasattr(response, "message") else str(response)
 
         content = agent_reply
-
+        
         try:
             parsed = json.loads(content)
             render_items = parsed.get("render", [])
@@ -78,7 +96,7 @@ class TaskDispatcherPlugin:
                                 "title": item["title"],
                                 "content": item["props"]["content"]
                             }
-                        )]
+                        )], author="Nutrition Agent"
                     ).send()
                 elif item["type"] == "image_note_block":
                     await cl.Message(content="", elements=[
@@ -89,15 +107,15 @@ class TaskDispatcherPlugin:
                                 "imageUrl": item["props"]["imageUrl"],
                                 "note": item["props"].get("note", "")
                             }
-                        )]
+                        )], author="Nutrition Agent"
                     ).send()
                     
                 else:
-                    await cl.Message(content=f"📦 Unsupported render block: {item}").send()
+                    await cl.Message(content=f"📦 Unsupported render block: {item}", author="Nutrition Agent").send()
 
 
         except Exception as e:
-            await cl.Message(content=content).send()
+            await cl.Message(content=content, author="Nutrition Agent").send()
 
 
     @kernel_function(name="route_to_mentalcare", description="Route a mental health-related task.")
@@ -106,4 +124,4 @@ class TaskDispatcherPlugin:
             response = await self.mentalcare_agent.get_response(messages=message, thread=self.mentalcare_thread)
             agent_reply = response.message.content if hasattr(response, "message") else str(response)
 
-        return agent_reply
+            
