@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from azure.identity.aio import DefaultAzureCredential
 from semantic_kernel.agents import AzureAIAgent
+from plugins.user_profile_query_plugin import UserProfileQueryPlugin
 
 load_dotenv()
 AGENT_ID = "asst_KYVNxnrqniCY4hVOXMwocDrH"

@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from azure.identity.aio import DefaultAzureCredential
 from semantic_kernel.agents import AzureAIAgent
 from plugins.fitness_plugin import FitnessPlugin
-from semantic_kernel.agents import ChatCompletionAgent
+from plugins.user_profile_query_plugin import UserProfileQueryPlugin
 load_dotenv()
 AGENT_ID = "asst_qd9bqmxFKPs1i0PA2wZgMqxG"
 
@@ -11,8 +11,9 @@ async def create_fitness_agent():
     creds = DefaultAzureCredential()
     client = AzureAIAgent.create_client(credential=creds)
     fitness_plugin = FitnessPlugin()
+    query_plugin = UserProfileQueryPlugin()
     agent_definition = await client.agents.get_agent(agent_id=AGENT_ID)
-    agent = AzureAIAgent(client=client, definition=agent_definition, plugins=[fitness_plugin])
+    agent = AzureAIAgent(client=client, definition=agent_definition, plugins=[fitness_plugin, query_plugin])
     return agent, client, creds
 """
 Here is the prompt which used in Azure Agent Service:

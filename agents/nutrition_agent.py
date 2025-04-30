@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from azure.identity.aio import DefaultAzureCredential
 from semantic_kernel.agents import AzureAIAgent
 from plugins.nutrition_plugin import NutritionPlugin
+from plugins.user_profile_query_plugin import UserProfileQueryPlugin
+
 load_dotenv()
 AGENT_ID = "asst_0rrjAc6UTuFfeK2qvLIikprv"
 
@@ -10,8 +12,9 @@ async def create_nutrition_agent():
     creds = DefaultAzureCredential()
     client = AzureAIAgent.create_client(credential=creds)
     nutrition_plugin = NutritionPlugin()
+    query_plugin = UserProfileQueryPlugin()
     agent_definition = await client.agents.get_agent(agent_id=AGENT_ID)
-    agent = AzureAIAgent(client=client, definition=agent_definition, plugins=[nutrition_plugin])
+    agent = AzureAIAgent(client=client, definition=agent_definition, plugins=[nutrition_plugin, query_plugin])
     return agent, client, creds
 """
 Here is the prompt which used in Azure Agent Service:
