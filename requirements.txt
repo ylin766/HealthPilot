@@ -5,3 +5,4 @@ chainlit
 aiohttp
 azure-ai-projects 
 azure-identity 
+playwright

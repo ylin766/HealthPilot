@@ -4,10 +4,13 @@ from azure.identity.aio import DefaultAzureCredential
 from semantic_kernel.agents import AzureAIAgent
 from plugins.nutrition_plugin import NutritionPlugin
 load_dotenv()
-AGENT_ID = "asst_0rrjAc6UTuFfeK2qvLIikprv"
+
+AGENT_ID = "asst_gLxOmLvtez9XpmdztuG92SX9"
 
 async def create_nutrition_agent():
     creds = DefaultAzureCredential()
+    print(creds)
+    print(os.getenv("AZURE_AI_AGENT_PROJECT_CONNECTION_STRING"))
     client = AzureAIAgent.create_client(credential=creds)
     nutrition_plugin = NutritionPlugin()
     agent_definition = await client.agents.get_agent(agent_id=AGENT_ID)

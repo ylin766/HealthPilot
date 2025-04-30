@@ -80,15 +80,9 @@ async def set_starters():
             label="",
             message="",
             icon="/public/avatars/fitness.png",
-        ),
-        cl.Starter(
-            label="",
-            message="",
-            icon="/public/avatars/fitness.png",
-        ),
-        cl.Starter(
-            label="",
-            message="",
-            icon="/public/avatars/fitness.png",
         )
     ]
+
+if __name__ == "__main__":
+    from chainlit.cli import run_chainlit
+    run_chainlit(__file__)

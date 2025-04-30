@@ -9,7 +9,7 @@ import chainlit as cl
 class FitnessPlugin:
 
     @kernel_function(
-        name="get_supported_muscles",
+        name="get_supported_muscles", 
         description="Return a list of supported muscle names for training video search."
     )
     async def get_supported_muscles(self) -> str:

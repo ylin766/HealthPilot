@@ -5,7 +5,7 @@ from semantic_kernel.agents import AzureAIAgent
 from plugins.fitness_plugin import FitnessPlugin
 from semantic_kernel.agents import ChatCompletionAgent
 load_dotenv()
-AGENT_ID = "asst_qd9bqmxFKPs1i0PA2wZgMqxG"
+AGENT_ID = "asst_gLxOmLvtez9XpmdztuG92SX9"
 
 async def create_fitness_agent():
     creds = DefaultAzureCredential()
