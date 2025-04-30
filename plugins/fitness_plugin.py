@@ -108,10 +108,10 @@ class FitnessPlugin:
             return list(seen_sources)
 
     @kernel_function(
-        name="get_video_note_block_format",
-        description="Return the JSON output format for rendering exercise videos with notes and tips."
+        name="get_format",
+        description="Return the JSON output format"
     )
-    async def get_video_note_block_format(self) -> str:
+    async def get__format(self) -> str:
         async with cl.Step(name="Summarizing exercise notes format...", type="function"):
             pass
         return json.dumps({
