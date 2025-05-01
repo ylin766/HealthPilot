@@ -129,7 +129,7 @@ Let's get HealthPilot running on your local machine!
 
 Refer the below link to test the application:
 
-Project Link: <app-link>
+Project Link: https://healthpilot-ebb2fue5ewbegcgv.eastus2-01.azurewebsites.net
 
 ## 💡 Future Improvements
 
