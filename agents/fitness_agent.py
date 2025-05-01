@@ -5,7 +5,7 @@ from semantic_kernel.agents import AzureAIAgent
 from plugins.fitness_plugin import FitnessPlugin
 from plugins.user_profile_query_plugin import UserProfileQueryPlugin
 load_dotenv()
-AGENT_ID = "asst_qd9bqmxFKPs1i0PA2wZgMqxG"
+AGENT_ID = os.getenv('FITNESS_ASSISTANT')
 
 async def create_fitness_agent():
     creds = DefaultAzureCredential()

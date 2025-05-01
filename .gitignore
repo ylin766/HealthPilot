@@ -6,4 +6,6 @@ __pycache__/
 .idea/
 *.log
 .DS_Store
+.venv/
+.chainlit
 

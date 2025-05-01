@@ -6,7 +6,7 @@ from plugins.nutrition_plugin import NutritionPlugin
 from plugins.user_profile_query_plugin import UserProfileQueryPlugin
 
 load_dotenv()
-AGENT_ID = "asst_0rrjAc6UTuFfeK2qvLIikprv"
+AGENT_ID = os.getenv('NUTRITION_ASSISTANT')
 
 async def create_nutrition_agent():
     creds = DefaultAzureCredential()
