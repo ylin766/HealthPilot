@@ -144,7 +144,6 @@ Project Link: https://healthpilot-ebb2fue5ewbegcgv.eastus2-01.azurewebsites.net
 * The [Semantic Kernel](https://github.com/microsoft/semantic-kernel) team for the powerful orchestration framework.
 * The [Chainlit](https://chainlit.io/) team for the awesome chat UI library.
 * Azure AI and OpenAI for the cutting-edge AI models.
-* *(Add any other libraries, APIs, or individuals you want to thank)*
 
 ## Team
 - **Yushuhong Lin** ([ylin766](https://github.com/ylin766))
