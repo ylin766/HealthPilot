@@ -1,7 +1,7 @@
 # 🩺 HealthPilot: Your AI-Powered Wellness Companion 🚀
 
 <p align="center">
-  <img src="./public/health.png" alt="HealthPilot Logo" width="150"/>
+  <img src="./public/logo_light.png" alt="HealthPilot Logo" width="150"/>
 </p>
 
 **Imagine having a personal health assistant available 24/7, ready to guide you on fitness, nutrition, and mental well-being. That's HealthPilot!** We've built an intelligent multi-agent system designed to provide holistic health advice, personalized plans, and helpful resources, all through a friendly chat interface.
