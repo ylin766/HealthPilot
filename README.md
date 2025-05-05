@@ -23,6 +23,8 @@ Whether you're looking to get fit, eat healthier, or manage stress, HealthPilot 
     * Send email summaries or confirmations (`SmtpPlugin` using Gmail).
     * *(Optional: Add ICS Calendar generation if implemented)*
 * **Azure Powered:** Utilizes Azure OpenAI (GPT-4o, GPT-4o-mini) and Azure AI Agents for robust AI capabilities and agent orchestration.
+* **RAG-Powered Responses:** Each agent is enhanced with **retrieval-augmented generation (RAG)** using the **Knowledge feature** in Azure AI Foundry's Agent Service — enabling more accurate, grounded, and domain-specific answers.
+
 
 ---
 
@@ -65,7 +67,13 @@ Let's get HealthPilot running on your local machine!
 * **Azure Account & Services:**
     * An active Azure subscription.
     * An Azure OpenAI resource with eg. **GPT-4o-mini** deployed (for the `HealthManager`).
-    * An Azure AI Studio/Foundry project with three **Azure AI Agents** created using the eg. **GPT-4o** model (Fitness, Nutrition, MentalCare). Set agent prompts in `agents/*.py` files. Note the `Agent ID` for each.
+    * An Azure AI Studio/Foundry project with three **Azure AI Agents** created using the eg. **GPT-4o** model (Fitness, Nutrition, MentalCare). Set agent prompts in `agents/*.py` files. Note the `Agent ID` for each. For each agent, upload the corresponding PDF from the `knowledge/` folder into the **Knowledge** section of Azure AI Studio to enable RAG-based responses:
+
+| Agent            | Knowledge PDF File                                      | Description                                |
+|------------------|---------------------------------------------------------|--------------------------------------------|
+| FitnessAgent     | ACE-Personal-Trainer-Manual-PDFDrive-.pdf              | Exercise science and workout planning      |
+| NutritionAgent   | Dietary_Guidelines_for_Americans_2020-2025.pdf         | Official dietary guidance and nutrition    |
+| MentalCareAgent  | therapists_guide_to_brief_cbtmanual.pdf                | Cognitive behavioral therapy and mental care |
 
 ### Installation & Setup
 
